@@ -2,10 +2,11 @@ header {
   display: flex;
   align-items: center;  /* 세로 중앙 정렬 */
   justify-content: center;  /* 텍스트 중앙 정렬 */
-  padding: 20px;
+  padding: 32px;
   background-color: #333;
   position: relative;
   flex-direction: column;  /* 수직 방향으로 정렬 */
+  text-align: center; /* 중앙 정렬 */
 }
 
 .logo {
@@ -20,7 +21,6 @@ header h1, header p {
   font-weight: bold;
   color: #fff;
   margin: 5px 0;  /* 위아래 여백 추가 */
-  text-align: center;
 }
 
 header p {

@@ -1,7 +1,7 @@
 .sheet-section {
     text-align: center;
     padding: 20px;
-    padding-bottom: 300px; /* 기존 200px에서 300px로 여유공간 추가 */
+    padding-bottom: 330px; /* 기존 200px에서 300px로 여유공간 추가 */
 }
   
   .sheet-grid {
