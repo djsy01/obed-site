@@ -214,7 +214,7 @@
 /* 직책 (position) 스타일 */
 .member-info .position {
   font-weight: bold;
-  color: #3498db;  /* 직책 색상 */
+  color: #ee82ee;  /* 직책 색상 */
   background-color: #e0f7fa;  /* 직책 배경 색 */
   padding: 5px 10px;
   border-radius: 5px;
