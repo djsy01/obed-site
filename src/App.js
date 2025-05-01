@@ -4,6 +4,7 @@ import Header from './components/Header'; // 헤더 컴포넌트
 import Navigation from './components/Navigation'; // 네비게이션 컴포넌트
 import Footer from './components/Footer'; // 푸터 컴포넌트
 
+
 import Home from './pages/Home'; // 홈 페이지
 import Team from './pages/Team'; // 팀 소개 페이지
 import Ministry from './pages/Ministry'; // 사역 페이지
