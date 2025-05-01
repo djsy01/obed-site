@@ -33,12 +33,16 @@
 }
 
 .highlight-box {
-  background-color: #ffde59;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-weight: bold;
+  background-color: #ffe97f;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
   color: #333;
+  display: inline-block;
+  margin: 4px 6px; /* 위아래 4px, 좌우 6px 여백 추가 */
 }
+
+
 
 .team-member-section h2 {
   font-size: 32px;
