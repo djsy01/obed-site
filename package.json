@@ -2,7 +2,7 @@
   "name": "obed-site",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://djsy01.github.io/Obed_site",
+  "homepage": "/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
@@ -47,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
