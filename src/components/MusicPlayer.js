@@ -1,47 +1,49 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaPlay, FaPause } from 'react-icons/fa';  // 아이콘 임포트
+import { FaPlay, FaPause } from 'react-icons/fa';
 
 const MusicPlayer = () => {
-  const audioRef1 = useRef(null);  // 첫 번째 노래
-  const audioRef2 = useRef(null);  // 두 번째 노래
-  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRef1 = useRef(null); // 첫 번째 곡
+  const audioRef2 = useRef(null); // 두 번째 곡
+  const [isPlaying, setIsPlaying] = useState(false); // 처음엔 재생 안됨
+  const [currentTrack, setCurrentTrack] = useState(1); // 1: 첫 번째, 2: 두 번째
 
   useEffect(() => {
     const audio1 = audioRef1.current;
     const audio2 = audioRef2.current;
 
-    // 첫 번째 곡이 끝나면 두 번째 곡을 재생
+    // 순환 재생 이벤트 핸들링
     const handleAudio1Ended = () => {
-      audio2.play(); // 두 번째 곡 재생
+      setCurrentTrack(2);
+      audio2.play();
     };
 
-    // 두 번째 곡이 끝나면 첫 번째 곡으로 돌아가도록 설정
     const handleAudio2Ended = () => {
-      audio1.play(); // 첫 번째 곡 재생
+      setCurrentTrack(1);
+      audio1.play();
     };
 
-    // 이벤트 리스너 추가
     audio1.addEventListener('ended', handleAudio1Ended);
     audio2.addEventListener('ended', handleAudio2Ended);
 
-    // 페이지 로드시 첫 번째 곡을 자동으로 재생
-    const playMusic = async () => {
+    // 자동 재생 시도 (브라우저 제한 존재)
+    const tryAutoPlay = async () => {
       try {
         await audio1.play();
+        setIsPlaying(true);
+        setCurrentTrack(1);
       } catch (error) {
-        console.log("자동 재생이 차단되었습니다:", error);
+        console.log("자동 재생 차단됨. 사용자 조작 필요:", error);
       }
     };
 
-    playMusic();
+    tryAutoPlay();
 
-    // 컴포넌트 언마운트 시 클린업
     return () => {
-      audio1.removeEventListener('ended', handleAudio1Ended); // 이벤트 리스너 제거
-      audio2.removeEventListener('ended', handleAudio2Ended); // 이벤트 리스너 제거
+      audio1.removeEventListener('ended', handleAudio1Ended);
+      audio2.removeEventListener('ended', handleAudio2Ended);
       audio1.pause();
-      audio1.currentTime = 0;
       audio2.pause();
+      audio1.currentTime = 0;
       audio2.currentTime = 0;
     };
   }, []);
@@ -49,24 +51,26 @@ const MusicPlayer = () => {
   const togglePlay = () => {
     const audio1 = audioRef1.current;
     const audio2 = audioRef2.current;
-    if (audio1.paused || audio2.paused) {
-      audio1.play();
-      audio2.play();
-      setIsPlaying(true);
-    } else {
+
+    if (isPlaying) {
       audio1.pause();
       audio2.pause();
       setIsPlaying(false);
+    } else {
+      if (currentTrack === 1) {
+        audio1.play();
+      } else {
+        audio2.play();
+      }
+      setIsPlaying(true);
     }
   };
 
   return (
     <div className="music-player">
-      {/* 첫 번째 노래 */}
       <audio ref={audioRef1} src="/assets/music/CelebratetheLight(inst).mp3" />
-      {/* 두 번째 노래 */}
       <audio ref={audioRef2} src="/assets/music/빛의사자들이여(inst).mp3" />
-      
+
       <button
         onClick={togglePlay}
         style={{
@@ -81,9 +85,9 @@ const MusicPlayer = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          position: 'absolute',  // 절대 위치로 변경
-          top: '10px',  // 상단에서 10px 떨어지도록 설정
-          right: '10px',  // 우측에서 10px 떨어지도록 설정
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
         }}
       >
         {isPlaying ? <FaPause /> : <FaPlay />}
