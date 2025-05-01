@@ -1,4 +1,5 @@
 <h1>2025.05.01<h1>
-<h2>기존 오벧사이트를 REACT로 재구성<h2>
-노래 추가<br/>
+<h3>노래 추가<h3>
+단, 토글버튼 눌러야 노래가 나옴
+<h3>기존 오벧사이트를 REACT로 재구성<h3>
 https://djsy01.github.io/OBED_website/
