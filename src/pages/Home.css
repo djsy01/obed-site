@@ -1,0 +1,14 @@
+.team-gallery {
+  padding-bottom: 90px; /* 👈 아래 공간 확보 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* 상단 여백 */
+}
+
+.Team-img img {
+  width: 100%; /* 컨테이너 크기에 맞춰 크기 조절 */
+  max-width: 800px; /* 최대 너비를 설정하여 너무 커지지 않도록 방지 */
+  height: auto; /* 비율을 유지하며 크기 조정 */
+  border-radius: 8px; /* 이미지 모서리 둥글게 */
+}
