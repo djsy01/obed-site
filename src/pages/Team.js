@@ -97,7 +97,9 @@ const Team = () => {
   ];
 
   // 필터링된 멤버 목록 생성
-  const filteredMembers = members.filter(member => filter === "all" || member.positions.includes(filter));
+  const filteredMembers = members.filter(member =>
+    filter.includes("all") || member.positions.some(pos => filter.includes(pos))
+  );
 
   return (
     <section className="team-section">
@@ -121,13 +123,13 @@ const Team = () => {
 
         {/* 필터 버튼 */}
         <div className="position-filter">
-          <button className={`filter-btn ${filter === "all" ? "active" : ""}`} onClick={() => setFilter("all")}>All</button>
-          <button className={`filter-btn ${filter === "Pastor" ? "active" : ""}`} onClick={() => setFilter("Pastor")}>Pastor</button>
-          <button className={`filter-btn ${filter === "Vocal" ? "active" : ""}`} onClick={() => setFilter("Vocal")}>Vocal</button>
-          <button className={`filter-btn ${filter === "Piano" ? "active" : ""}`} onClick={() => setFilter("Piano")}>Piano</button>
-          <button className={`filter-btn ${filter === "Guitar" ? "active" : ""}`} onClick={() => setFilter("Guitar")}>Guitar</button>
-          <button className={`filter-btn ${filter === "Drum" ? "active" : ""}`} onClick={() => setFilter("Drum")}>Drum</button>
-          <button className={`filter-btn ${filter === "Step" ? "active" : ""}`} onClick={() => setFilter("Step")}>Step</button>
+          <button className={`filter-btn ${filter.includes("all") ? "active" : ""}`} onClick={() => setFilter(["all"])}>All</button>
+          <button className={`filter-btn ${filter.includes("Pastor") ? "active" : ""}`} onClick={() => setFilter(["Pastor"])}>Pastor</button>
+          <button className={`filter-btn ${filter.includes("Vocal") ? "active" : ""}`} onClick={() => setFilter(["Vocal"])}>Vocal</button>
+          <button className={`filter-btn ${filter.includes("Piano") || filter.includes("Synthesizer") ? "active" : ""}`} onClick={() => setFilter(["Piano", "Synthesizer"])}>Piano</button>
+          <button className={`filter-btn ${["Acoustic Guitar", "Electric Guitar", "Bass Guitar"].some(pos => filter.includes(pos)) ? "active" : ""}`} onClick={() => setFilter(["Acoustic Guitar", "Electric Guitar", "Bass Guitar"])}>Guitar</button>
+          <button className={`filter-btn ${filter.includes("Drum") ? "active" : ""}`} onClick={() => setFilter(["Drum"])}>Drum</button>
+          <button className={`filter-btn ${["Step", "Engineer"].some(pos => filter.includes(pos)) ? "active" : ""}`} onClick={() => setFilter(["Step", "Engineer"])}>Step</button>
         </div>
 
         {/* 팀원 카드들 */}
