@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Obed_site/static/css/main.2274ef7a.css",
+    "main.js": "/Obed_site/static/js/main.c5bb9d4d.js",
+    "static/js/453.59771505.chunk.js": "/Obed_site/static/js/453.59771505.chunk.js",
+    "index.html": "/Obed_site/index.html",
+    "main.2274ef7a.css.map": "/Obed_site/static/css/main.2274ef7a.css.map",
+    "main.c5bb9d4d.js.map": "/Obed_site/static/js/main.c5bb9d4d.js.map",
+    "453.59771505.chunk.js.map": "/Obed_site/static/js/453.59771505.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2274ef7a.css",
+    "static/js/main.c5bb9d4d.js"
+  ]
+}
