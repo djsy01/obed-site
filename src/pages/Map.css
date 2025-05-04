@@ -7,6 +7,13 @@
   text-align: center;
 }
 
+.map-mapping {
+  padding: 10px;
+  padding-bottom: 90px;
+  text-align: conter;
+  font-weight: bold;
+}
+
 .map-container {
   width: 100%;
   max-width: 100%;

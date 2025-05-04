@@ -5,7 +5,12 @@ function Map() {
   return (
     <div className="map-section">
       <h2>찾아오시는 길</h2>
-      <p>경기도 고양시 덕양구 용현로 64 (예수인교회)</p>
+      <p>
+        경기도 고양시 덕양구 용현로 64 (예수인교회) <br/>
+        <div className="map-mapping">
+          본관 지하 2층
+        </div>
+      </p>
 
       <div className="map-container">
         <iframe

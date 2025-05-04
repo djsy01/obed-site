@@ -1,6 +1,6 @@
 /* 시즌 카드 스타일 */
 .season-gallery {
-  padding-bottom: 420px; /* 페이지 하단에 충분한 공간을 확보 */
+  padding-bottom: 460px; /* 페이지 하단에 충분한 공간을 확보 */
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
