@@ -1,6 +1,7 @@
 nav {
   background-color: #444;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center; /* 추가: nav 내부 중앙 정렬 */
   width: 100%;        /* 추가: 전체 폭 사용 */
 }
