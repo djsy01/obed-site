@@ -22,18 +22,25 @@ const Team = () => {
       photo: "", // 사진 URL
     },
     {
+      name: "오현명 집사",
+      designation: "장년부",
+      positions: ["Piano"],
+      instagram: "",
+      youtube: "",
+      photo: "", // 사진 URL
+    },
+    {
       name: "엄인호",
       affiliation: "청년부",
       positions: ["Vocal", "Acoustic Guitar", "Electric Guitar", "Engineer"],
       instagram: "https://www.instagram.com/inho010804",
       youtube: "https://www.youtube.com/@djsy-r2c",
-      photo: "/assets/peaple/inho.JPG", // 사진 URL
+      photo: "/assets/people/inho.JPG", // 사진 URL
     },
     {
-      name: "오종언",
+      name: "유근서",
       affiliation: "청년부",
-      positions: ["Vocal", "Engineer"],
-      instagram: "https://www.instagram.com/5_bells_05",
+      positions: ["Acoustic Guitar", "Electric Guitar"],
       photo: "", // 사진 URL
     },
     {
@@ -41,35 +48,6 @@ const Team = () => {
       affiliation: "청년부",
       positions: ["Vocal"],
       instagram: "https://www.instagram.com/winnie_the_ron_02",
-      photo: "", // 사진 URL
-    },
-    {
-      name: "신예솔",
-      affiliation: "고등부",
-      positions: ["Vocal"],
-      instagram: "https://www.instagram.com/yz_sol5",
-      youtube: "https://youtube.com/channel/UCvyHxOBm7RDwCo62pFBwVSA?si=eBgRDrWO0dP5sE9H",
-      photo: "", // 사진 URL
-    },
-    {
-      name: "김온유",
-      affiliation: "고등부",
-      positions: ["Vocal"],
-      instagram: "https://www.instagram.com/onyourmusic",
-      youtube: "https://www.youtube.com/@onyourmusic",
-      photo: "", // 사진 URL
-    },
-    {
-      name: "신지은",
-      affiliation: "청년부",
-      positions: ["Piano", "Synthesizer"],
-      instagram: "https://www.instagram.com/_wldms.3",
-      photo: "", // 사진 URL
-    },
-    {
-      name: "유근서",
-      affiliation: "청년부",
-      positions: ["Acoustic Guitar", "Electric Guitar"],
       photo: "", // 사진 URL
     },
     {
@@ -85,6 +63,28 @@ const Team = () => {
       positions: ["Bass Guitar", "Drum", "Engineer"],
       instagram: "https://www.instagram.com/drum_wook02",
       youtube: "https://youtube.com/channel/UC_vv_fm_8e3O8xTb5TbPKrg?si=5B5EEspQ7m8hhgYE",
+      photo: "/assets/people/DrumWook.jpeg", // 사진 URL
+    },
+    {
+      name: "김온유",
+      affiliation: "청년부",
+      positions: ["Vocal"],
+      instagram: "https://www.instagram.com/onyourmusic",
+      youtube: "https://www.youtube.com/@onyourmusic",
+      photo: "", // 사진 URL
+    },
+    {
+      name: "오종언",
+      affiliation: "청년부",
+      positions: ["Vocal", "Engineer"],
+      instagram: "https://www.instagram.com/5_bells_05",
+      photo: "", // 사진 URL
+    },
+    {
+      name: "신지은",
+      affiliation: "청년부",
+      positions: ["Piano", "Synthesizer"],
+      instagram: "https://www.instagram.com/_wldms.3",
       photo: "", // 사진 URL
     },
     {
@@ -92,6 +92,14 @@ const Team = () => {
       affiliation: "고등부",
       positions: ["Drum"],
       instagram: "https://www.instagram.com/z.sbbxn_",
+      photo: "", // 사진 URL
+    },
+    {
+      name: "신예솔",
+      affiliation: "고등부",
+      positions: ["Vocal"],
+      instagram: "https://www.instagram.com/yz_sol5",
+      youtube: "https://youtube.com/channel/UCvyHxOBm7RDwCo62pFBwVSA?si=eBgRDrWO0dP5sE9H",
       photo: "", // 사진 URL
     },
   ];
