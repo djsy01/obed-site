@@ -3,15 +3,7 @@
   <channel>
     <title>OBED 소식</title>
     <link>https://obedwebsite.vercel.app/</link>
-    <description>로봇 팔 분류 시스템 업데이트</description>
-
-    <item>
-      <title>최신 업데이트</title>
-      <link>https://obedwebsite.vercel.app/</link>
-      <description>사이트 개장</description>
-      <pubDate>Sat, 10 May 2025 18:29 +0900</pubDate>
-    </item>
-
+    <description>오벧 사이트 업로드</description>
     <!-- item 계속 추가 가능 -->
   </channel>
 </rss>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://obedwebsite.vercel.app/</loc> <!-- 홈페이지 URL -->
+    <lastmod>2025-05-10T18:29:00+09:00</lastmod> <!-- 마지막 수정 날짜 -->
+    <priority>1.0</priority> <!-- 페이지 우선순위 -->
+  </url>
+  <!-- 추가적인 페이지들을 여기에 추가 -->
+</urlset>
