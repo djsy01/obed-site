@@ -23,7 +23,7 @@ const Team = () => {
     },
     {
       name: "오현명 집사",
-      designation: "장년부",
+      affiliation: "장년부",
       positions: ["Piano"],
       instagram: "",
       youtube: "",
