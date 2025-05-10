@@ -4,6 +4,13 @@
     <title>OBED 소식</title>
     <link>https://obedwebsite.vercel.app/</link>
     <description>오벧 사이트 업로드</description>
-    <!-- item 계속 추가 가능 -->
+
+    <item>
+      <title>사이트 첫 배포</title>
+      <link>https://obedwebsite.vercel.app/</link>
+      <description>오벧 사이트가 첫 배포되었습니다. 확인해 보세요!</description>
+      <pubDate>Sat, 10 May 2025 18:29:00 +0900</pubDate> <!-- 게시일 -->
+    </item>
+
   </channel>
 </rss>
