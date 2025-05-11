@@ -89,7 +89,7 @@ const Team = () => {
       acount: ["Worship"],
       positions: ["Vocal", "Engineer"],
       instagram: "https://www.instagram.com/5_bells_05",
-      photo: "",
+      photo: "/assets/people/Jongeon.jpeg",
     },
     {
       name: "신지은",
