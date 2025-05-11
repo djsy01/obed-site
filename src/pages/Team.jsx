@@ -47,7 +47,7 @@ const Team = () => {
       affiliation: "장년부",
       acount: ["Worship"],
       positions: ["Piano"],
-      instagram: "",
+      instagram: "https://www.instagram.com/5hyunmy/",
       youtube: "",
       photo: "",
     },
