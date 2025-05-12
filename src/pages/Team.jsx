@@ -6,6 +6,7 @@ import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 const Team = () => {
   const [filter, setFilter] = useState("all");
   const [worshipFilter, setWorshipFilter] = useState("");
+  const [stepFilter, setStepFilter] = useState("");
 
   const members = [
     {
@@ -15,6 +16,15 @@ const Team = () => {
       positions: ["Pastor"],
       instagram: "https://www.instagram.com/holyforest.jpg",
       photo: "",
+    },
+    {
+      name: "이기인 장로",
+      affiliation: "장년부",
+      acount: ["Elder"],
+      positions: ["Elder"],
+      instagram: "",
+      youtube: "",
+      photo: "/assets/people/Giin.jpeg",
     },
     {
       name: "김미정 집사",
@@ -51,6 +61,33 @@ const Team = () => {
       youtube: "",
       photo: "",
     },
+    /*{
+      name: "박민석",
+      affiliation: "청년부",
+      acount: ["Step"],
+      positions: ["PPT"],
+      instagram: "https://www.instagram.com/min_mola_/",
+      youtube: "",
+      photo: "",
+    },
+    {
+      name: "박세곤",
+      affiliation: "청년부",
+      acount: ["Step"],
+      positions: ["Lighting"],
+      instagram: "",
+      youtube: "",
+      photo: "",
+    },
+    {
+      name: "선무진",
+      affiliation: "청년부",
+      acount: ["Step"],
+      positions: ["Media"],
+      instagram: "https://www.instagram.com/moojin9351/",
+      youtube: "",
+      photo: "",
+    },*/
     {
       name: "유근서",
       affiliation: "청년부",
@@ -58,6 +95,24 @@ const Team = () => {
       positions: ["Acoustic Guitar", "Electric Guitar"],
       photo: "",
     },
+    /*{
+      name: "이태훈",
+      affiliation: "청년부",
+      acount: ["Step"],
+      positions: ["Media"],
+      instagram: "https://www.instagram.com/little_hun_0/",
+      youtube: "",
+      photo: "",
+    },
+    {
+      name: "임서원",
+      affiliation: "청년부",
+      acount: ["Step"],
+      positions: ["Media"],
+      instagram: "https://www.instagram.com/seowon_01/",
+      youtube: "",
+      photo: "",
+    },*/
     {
       name: "전예원",
       affiliation: "청년부",
@@ -81,7 +136,7 @@ const Team = () => {
       positions: ["Vocal"],
       instagram: "https://www.instagram.com/onyourmusic",
       youtube: "https://www.youtube.com/@onyourmusic",
-      photo: "",
+      photo: "/assets/people/onnew.jpeg",
     },
     {
       name: "오종언",
@@ -122,7 +177,7 @@ const Team = () => {
     if (filter === "all") return true;
 
     if (filter === "leader") {
-      return ["Pastor", "Accounting", "Secretary", "Worship Leader", "Worship Sub Leader"]
+      return ["Pastor","Elder", "Accounting", "Secretary", "Worship Leader", "Worship Sub Leader"]
         .some(role => member.acount.includes(role));
     }
 
@@ -147,7 +202,13 @@ const Team = () => {
     }
 
     if (filter === "step") {
-      return member.positions.includes("Step");
+      if (stepFilter === "") {
+        return member.positions.some(pos =>
+          ["PPT", "Media", "Lighting"].includes(pos)
+        );
+      } else {
+        return member.positions.includes(stepFilter);
+      }
     }
 
     return false;
@@ -156,6 +217,7 @@ const Team = () => {
   const handleMainFilter = (value) => {
     setFilter(value);
     setWorshipFilter("");
+    setStepFilter("");
   };
 
   return (
@@ -193,6 +255,15 @@ const Team = () => {
             <button className={`filter-btn ${["Acoustic Guitar", "Electric Guitar", "Bass Guitar"].includes(worshipFilter) ? "active" : ""}`} onClick={() => setWorshipFilter("Guitar")}>Guitar</button>
             <button className={`filter-btn ${worshipFilter === "Drum" ? "active" : ""}`} onClick={() => setWorshipFilter("Drum")}>Drum</button>
             <button className={`filter-btn ${worshipFilter === "Engineer" ? "active" : ""}`} onClick={() => setWorshipFilter("Engineer")}>Engineer</button>
+          </div>
+        )}
+
+        {filter === "step" && (
+          <div className="step-filters">
+            <button className={`filter-btn ${stepFilter === "" ? "active" : ""}`} onClick={() => setStepFilter("")}>Step All</button>
+            <button className={`filter-btn ${stepFilter === "PPT" ? "active" : ""}`} onClick={() => setStepFilter("PPT")}>PPT</button>
+            <button className={`filter-btn ${stepFilter === "Lighting" ? "active" : ""}`} onClick={() => setStepFilter("Lighting")}>Lighting</button>
+            <button className={`filter-btn ${stepFilter === "Media" ? "active" : ""}`} onClick={() => setStepFilter("Media")}>Media</button>
           </div>
         )}
 

@@ -78,7 +78,7 @@
   background-color: #4e37b5;
 }
 
-/* 하위 필터 */
+/* 하위 Worship 필터 */
 .worship-filters {
   display: flex;
   justify-content: center;
@@ -97,6 +97,28 @@
 }
 
 .worship-filters .filter-btn:hover {
+  background-color: #d63031;
+}
+
+/* 하위 Step 필터 */
+.step-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.step-filters .filter-btn {
+  background-color: #e84393; /* 핑크색 계열 */
+  color: white;
+}
+
+.step-filters .filter-btn.active {
+  background-color: #d63031; /* 더 어두운 핑크 */
+}
+
+.step-filters .filter-btn:hover {
   background-color: #d63031;
 }
 
