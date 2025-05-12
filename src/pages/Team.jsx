@@ -65,7 +65,7 @@ const Team = () => {
       name: "박민석",
       affiliation: "청년부",
       acount: ["Step"],
-      positions: ["PPT"],
+      positions: ["Media"],
       instagram: "https://www.instagram.com/min_mola_/",
       youtube: "",
       photo: "",
@@ -74,7 +74,7 @@ const Team = () => {
       name: "박세곤",
       affiliation: "청년부",
       acount: ["Step"],
-      positions: ["Lighting"],
+      positions: ["Media"],
       instagram: "",
       youtube: "",
       photo: "",
@@ -87,7 +87,14 @@ const Team = () => {
       instagram: "https://www.instagram.com/moojin9351/",
       youtube: "",
       photo: "",
-    },*/
+    },
+    {
+      name: "김예섬",
+      affiliation: "청년부",
+      acount: ["Public Relations"],
+      positions: ["Poster Making"],
+      photo: "",
+    }, */
     {
       name: "유근서",
       affiliation: "청년부",
@@ -204,7 +211,7 @@ const Team = () => {
     if (filter === "step") {
       if (stepFilter === "") {
         return member.positions.some(pos =>
-          ["PPT", "Media", "Lighting"].includes(pos)
+          ["Media", "Public Relations"].includes(pos)
         );
       } else {
         return member.positions.includes(stepFilter);
@@ -261,9 +268,8 @@ const Team = () => {
         {filter === "step" && (
           <div className="step-filters">
             <button className={`filter-btn ${stepFilter === "" ? "active" : ""}`} onClick={() => setStepFilter("")}>Step All</button>
-            <button className={`filter-btn ${stepFilter === "PPT" ? "active" : ""}`} onClick={() => setStepFilter("PPT")}>PPT</button>
-            <button className={`filter-btn ${stepFilter === "Lighting" ? "active" : ""}`} onClick={() => setStepFilter("Lighting")}>Lighting</button>
             <button className={`filter-btn ${stepFilter === "Media" ? "active" : ""}`} onClick={() => setStepFilter("Media")}>Media</button>
+            <button className={`filter-btn ${stepFilter === "Public Relations" ? "active" : ""}`} onClick={() => setStepFilter("Public Relations")}>Public Relations</button>
           </div>
         )}
 
