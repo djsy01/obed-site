@@ -129,7 +129,8 @@ function Ministry() {
     setCurrentIndex((pageNumber - 1) * imagesPerPage);
   };
 
-  const totalPages = Math.ceil(galleryImages[currentSeason].length / imagesPerPage);
+  const totalImages = galleryImages[currentSeason].length;
+  const totalPages = Math.ceil(totalImages / imagesPerPage);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -177,11 +178,19 @@ function Ministry() {
         <div className="gallery-popup">
           <span className="close" onClick={closeGallery}>&times;</span>
           <div className="gallery-content">
+            {/* 이전 이미지 버튼 */}
+            <button className="prev-button" onClick={() => setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : totalImages - 1)}>
+              &lt;
+            </button>
             <img
               src={galleryImages[currentSeason][currentIndex]}
               className="main-gallery-img"
               alt={`메인 이미지 ${currentIndex}`}
             />
+            {/* 다음 이미지 버튼 */}
+            <button className="next-button" onClick={() => setCurrentIndex(currentIndex < totalImages - 1 ? currentIndex + 1 : 0)}>
+              &gt;
+            </button>
             <div className="thumbnail-list">
               {galleryImages[currentSeason].map((src, i) => (
                 <img

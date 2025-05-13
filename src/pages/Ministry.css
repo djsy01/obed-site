@@ -80,6 +80,17 @@
   padding: 20px;
 }
 
+/* 닫기 버튼 */
+.close {
+  position: absolute;
+  top: 10px;
+  left: 1750px;
+  font-size: 30px;
+  color: red;
+  cursor: pointer;
+}
+
+/* 이미지 콘텐츠 */
 .gallery-content {
   position: relative;
   background: white;
@@ -93,6 +104,27 @@
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 이전/다음 버튼 */
+.prev-button, .next-button {
+  position: absolute;
+  top: 38%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  font-size: 40px;
+  color: yellowgreen;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
 }
 
 /* 메인 이미지 */
@@ -127,19 +159,6 @@
   border: 2px solid #fff;
 }
 
-
-/* 닫기 버튼 */
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  cursor: pointer;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 5px 10px;
-  border-radius: 50%;
-}
 
 /* 이전/다음 버튼 */
 .pagination {
