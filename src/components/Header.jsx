@@ -7,7 +7,7 @@ function Header() {
 
   return (
     <header>
-      <img src={process.env.PUBLIC_URL + '/assets/image/LOG.JPG'} alt="OBED Worship Logo" className="logo" />
+      <img src={process.env.PUBLIC_URL + '/assets/image/LOGO.JPG'} alt="OBED Worship Logo" className="logo" />
       <h1>OBED Worship</h1>
       <p>하나님을 예배하는 공동체</p>
       <div className="music-player-container">

@@ -9,7 +9,7 @@ const Sheet = () => {
     {
       title: '2025년 Season1',
       subtitle: '하나됨',
-      image: '/assets/image/oneness.png',
+      image: '/assets/image/oneness/oneness.png',
       pdf: '/assets/pdf/oneness.pdf',
     },
     // 추가 악보 데이터를 여기에 삽입...
@@ -48,6 +48,15 @@ const Sheet = () => {
         ))}
       </div>
 
+      {/* 목차 */}
+      <div className="pagination-buttons">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button key={index} onClick={() => handlePageChange(index + 1)}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
+
       {/* 페이지네이션 */}
       <div className="pagination">
         <button
@@ -63,15 +72,6 @@ const Sheet = () => {
         >
           다음
         </button>
-      </div>
-
-      {/* 목차 */}
-      <div className="pagination-buttons">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button key={index} onClick={() => handlePageChange(index + 1)}>
-            {index + 1}
-          </button>
-        ))}
       </div>
     </section>
   );

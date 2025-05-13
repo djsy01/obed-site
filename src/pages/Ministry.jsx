@@ -5,12 +5,104 @@ import './Ministry.css';
 // 이미지 경로 문자열로 수정
 const galleryImages = {
   "25season1": [
-    "/assets/image/preparation.JPG",
-    "/assets/image/1.jpeg",
-    "/assets/image/2.jpeg",
-    "/assets/image/3.jpeg",
-    "/assets/image/4.jpeg",
-    "/assets/image/5.jpeg"
+    "/assets/image/oneness/preparation.JPG",
+    "/assets/image/oneness/1.jpeg",
+    "/assets/image/oneness/2.jpeg",
+    "/assets/image/oneness/3.jpeg",
+    "/assets/image/oneness/4.jpeg",
+    "/assets/image/oneness/5.jpeg",
+    "/assets/image/oneness/6.jpeg",
+    "/assets/image/oneness/7.jpeg",
+    "/assets/image/oneness/8.jpeg",
+    "/assets/image/oneness/9.jpeg",
+    "/assets/image/oneness/10.jpeg",
+    "/assets/image/oneness/11.jpeg",
+    "/assets/image/oneness/12.jpeg",
+    "/assets/image/oneness/13.jpeg",
+    "/assets/image/oneness/14.jpeg",
+    "/assets/image/oneness/15.jpeg",
+    "/assets/image/oneness/16.jpeg",
+    "/assets/image/oneness/17.jpeg",
+    "/assets/image/oneness/18.jpeg",
+    "/assets/image/oneness/19.JPG",
+    "/assets/image/oneness/20.jpeg",
+    "/assets/image/oneness/21.jpeg",
+    "/assets/image/oneness/22.JPG",
+    "/assets/image/oneness/23.jpeg",
+    "/assets/image/oneness/24.jpeg",
+    "/assets/image/oneness/26.jpeg",
+    "/assets/image/oneness/27.jpeg",
+    "/assets/image/oneness/28.jpeg",
+    "/assets/image/oneness/29.jpeg",
+    "/assets/image/oneness/30.jpeg",
+    "/assets/image/oneness/31.jpeg",
+    "/assets/image/oneness/32.jpeg",
+    "/assets/image/oneness/33.jpeg",
+    "/assets/image/oneness/34.jpeg",
+    "/assets/image/oneness/35.JPG",
+    "/assets/image/oneness/36.jpeg",
+    "/assets/image/oneness/37.JPG",
+    "/assets/image/oneness/38.jpeg",
+    "/assets/image/oneness/39.jpeg",
+    "/assets/image/oneness/40.jpeg",
+    "/assets/image/oneness/41.jpeg",
+    "/assets/image/oneness/42.jpeg",
+    "/assets/image/oneness/43.jpeg",
+    "/assets/image/oneness/44.jpeg",
+    "/assets/image/oneness/45.jpeg",
+    "/assets/image/oneness/46.jpeg",
+    "/assets/image/oneness/47.jpeg",
+    "/assets/image/oneness/48.jpeg",
+    "/assets/image/oneness/49.jpeg",
+    "/assets/image/oneness/50.jpeg",
+    "/assets/image/oneness/51.jpeg",
+    "/assets/image/oneness/52.jpeg",
+    "/assets/image/oneness/53.jpeg",
+    "/assets/image/oneness/54.jpeg",
+    "/assets/image/oneness/55.jpeg",
+    "/assets/image/oneness/56.jpeg",
+    "/assets/image/oneness/57.jpeg",
+    "/assets/image/oneness/58.jpeg",
+    "/assets/image/oneness/59.jpeg",
+    "/assets/image/oneness/60.jpeg",
+    "/assets/image/oneness/61.jpeg",
+    "/assets/image/oneness/62.jpeg",
+    "/assets/image/oneness/63.jpeg",
+    "/assets/image/oneness/64.jpeg",
+    "/assets/image/oneness/65.jpeg",
+    "/assets/image/oneness/66.jpeg",
+    "/assets/image/oneness/67.jpeg",
+    "/assets/image/oneness/68.jpeg",
+    "/assets/image/oneness/69.jpeg",
+    "/assets/image/oneness/70.jpeg",
+    "/assets/image/oneness/71.jpeg",
+    "/assets/image/oneness/72.jpeg",
+    "/assets/image/oneness/73.jpeg",
+    "/assets/image/oneness/74.jpeg",
+    "/assets/image/oneness/75.jpeg",
+    "/assets/image/oneness/76.jpeg",
+    "/assets/image/oneness/77.jpeg",
+    "/assets/image/oneness/78.jpeg",
+    "/assets/image/oneness/79.jpeg",
+    "/assets/image/oneness/80.jpeg",
+    "/assets/image/oneness/81.jpeg",
+    "/assets/image/oneness/82.jpeg",
+    "/assets/image/oneness/83.jpeg",
+    "/assets/image/oneness/84.jpeg",
+    "/assets/image/oneness/85.jpeg",
+    "/assets/image/oneness/86.jpeg",
+    "/assets/image/oneness/87.jpeg",
+    "/assets/image/oneness/88.jpeg",
+    "/assets/image/oneness/89.jpeg",
+    "/assets/image/oneness/90.jpeg",
+    "/assets/image/oneness/92.JPG",
+    "/assets/image/oneness/93.JPG",
+    "/assets/image/oneness/94.JPG",
+    "/assets/image/oneness/95.JPG",
+    "/assets/image/oneness/96.JPG",
+    "/assets/image/oneness/97.JPG",
+    "/assets/image/oneness/98.JPG",
+    "/assets/image/oneness/99.JPG",
   ],
 };
 
@@ -34,14 +126,10 @@ function Ministry() {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') {
-        if (galleryImages[currentSeason] && currentIndex < galleryImages[currentSeason].length - 1) {
-          setCurrentIndex(currentIndex + 1);
-        }
-      } else if (e.key === 'ArrowLeft') {
-        if (currentIndex > 0) {
-          setCurrentIndex(currentIndex - 1);
-        }
+      if (e.key === 'ArrowRight' && currentIndex < galleryImages[currentSeason].length - 1) {
+        setCurrentIndex((prev) => prev + 1);
+      } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+        setCurrentIndex((prev) => prev - 1);
       } else if (e.key === 'Escape') {
         closeGallery();
       }
@@ -49,13 +137,8 @@ function Ministry() {
 
     if (isGalleryOpen) {
       document.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.removeEventListener('keydown', handleKeyDown);
     }
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isGalleryOpen, currentIndex, currentSeason]);
 
   const paginate = (pageNumber) => {
@@ -63,20 +146,19 @@ function Ministry() {
     setCurrentIndex((pageNumber - 1) * imagesPerPage);
   };
 
-  const currentImages = galleryImages[currentSeason]?.slice(
+  const totalPages = Math.ceil(galleryImages[currentSeason].length / imagesPerPage);
+  const currentImages = galleryImages[currentSeason].slice(
     (currentPage - 1) * imagesPerPage,
     currentPage * imagesPerPage
-  ) || [];
-
-  const currentImage = galleryImages[currentSeason]?.[currentIndex] || '';
+  );
 
   return (
-    <div>
-      {/* 사역 카드 */}
+    <div className='season'>
+      {/* 카드 섹션 */}
       <section className="season-gallery">
         <div className="season-card-horizontal" onClick={() => openGallery("25season1")}>
           <div className="season-img-wrapper">
-            <img src="/assets/image/oneness.png" alt="Season 1 - 하나됨" />
+            <img src="/assets/image/oneness/oneness.png" alt="Season 1 - 하나됨" />
           </div>
           <div className="season-info">
             <h3>2025년 Season 1 - “하나됨”</h3>
@@ -98,50 +180,38 @@ function Ministry() {
         <div className="gallery-popup">
           <span className="close" onClick={closeGallery}>&times;</span>
           <div className="gallery-content">
-            {currentImage && (
-              <img
-                className="main-gallery-img"
-                src={currentImage}
-                alt="갤러리 메인"
-              />
-            )}
-            <div className="thumbnail-list">
-              {currentImages.map((src, i) => (
+            {currentImages.map((src, i) => {
+              const actualIndex = (currentPage - 1) * imagesPerPage + i;
+              return (
                 <img
-                  key={i}
+                  key={actualIndex}
                   src={src}
-                  className={`thumbnail-img ${i === currentIndex ? 'active' : ''}`}
-                  alt={`썸네일 ${i}`}
-                  onClick={() => setCurrentIndex(i)}
+                  className={`thumbnail-img ${actualIndex === currentIndex ? 'active' : ''}`}
+                  alt={`썸네일 ${actualIndex}`}
+                  onClick={() => setCurrentIndex(actualIndex)}
                 />
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* 페이지네이션 */}
+      {/* 이전/다음 페이지 버튼 */}
       <div className="pagination">
-        <button
-          onClick={() => paginate(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          이전
-        </button>
+        <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>이전</button>
         <span>페이지 {currentPage}</span>
-        <button
-          onClick={() => paginate(currentPage + 1)}
-          disabled={currentPage * imagesPerPage >= (galleryImages[currentSeason]?.length || 0)}
-        >
-          다음
-        </button>
+        <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>다음</button>
       </div>
 
-      {/* 목차 */}
+      {/* 페이지 번호 버튼 (동적으로 생성) */}
       <div className="pagination-buttons">
-        {Array.from({ length: Math.ceil((galleryImages[currentSeason]?.length || 0) / imagesPerPage) }, (_, index) => (
-          <button key={index} onClick={() => paginate(index + 1)}>
-            {index + 1}
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => paginate(i + 1)}
+            className={currentPage === i + 1 ? 'active' : ''}
+          >
+            {i + 1}
           </button>
         ))}
       </div>

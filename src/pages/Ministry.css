@@ -1,3 +1,7 @@
+.season {
+  padding-bottom: 10px;
+}
+
 /* 시즌 카드 스타일 */
 .season-gallery {
   padding-bottom: 460px; /* 페이지 하단에 충분한 공간을 확보 */
@@ -11,7 +15,7 @@
 .season-card-horizontal {
   display: flex;
   cursor: pointer;
-  margin: 15px; /* 카드 간격을 약간 더 넓힘 */
+  margin: 15px;
   border: 2px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -25,7 +29,7 @@
 }
 
 .season-img-wrapper {
-  width: 33%; /* 이미지 영역 크기 */
+  width: 33%;
   height: 100%;
 }
 
@@ -36,7 +40,7 @@
 }
 
 .season-info {
-  width: 67%; /* 내용 영역 크기 */
+  width: 67%;
   padding: 10px;
   text-align: left;
 }
@@ -76,34 +80,41 @@
 .gallery-content {
   position: relative;
   background: white;
+  width: 800px;           /* ✅ 고정 너비 */
+  height: 600px;          /* ✅ 고정 높이 */
   padding: 20px;
   border-radius: 10px;
-  max-width: 90%;
-  max-height: 90%;
   overflow: hidden;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* 메인 이미지 */
 .main-gallery-img {
   width: 100%;
-  height: auto;
-  max-width: 500px; /* 최대 크기 제한 */
+  height: 450px;          /* ✅ 고정 높이 */
+  object-fit: contain;    /* ✅ 비율 유지하며 공간 내에 맞춤 */
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* 썸네일 리스트 - 가로 스크롤 적용 */
 .thumbnail-list {
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
+  overflow-x: auto;       /* ✅ 가로 스크롤 */
   gap: 10px;
-  flex-wrap: wrap;
+  padding: 10px 0;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .thumbnail-img {
   width: 60px;
   height: 60px;
-  margin: 0 5px;
+  flex-shrink: 0;
   cursor: pointer;
   border-radius: 8px;
   object-fit: cover;
@@ -119,6 +130,7 @@
   border: 3px solid #4CAF50;
 }
 
+/* 닫기 버튼 */
 .close {
   position: absolute;
   top: 10px;
@@ -132,33 +144,16 @@
 }
 
 /* 이전/다음 버튼 */
+/* 이전/다음 버튼 */
 .pagination {
-  position: relative;
-  bottom: 30px; /* 페이지 버튼을 아래쪽으로 좀 더 내림 */
+  position: absolute;
+  bottom: 30px; /* 페이지 버튼을 아래쪽으로 내림 */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   justify-content: center;
   gap: 20px;
   align-items: center;
-}
-
-.pagination-buttons {
-  position: relative;
-  bottom: 80px; /* 페이지 번호 버튼을 이전/다음 버튼 위에 위치시킴 */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-}
-
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #f1f1f1;
 }
 
 /* 페이지네이션 버튼 (목차) */
@@ -171,15 +166,32 @@
   gap: 10px;
 }
 
-.pagination-buttons button {
-  padding: 5px 10px;
-  background-color: #fff;
-  border: none;
+.pagination-buttons button,
+.pagination button {
+  padding: 8px 16px;
+  background-color: #ccc;  /* 기본 회색 배경 */
+  border: 1px solid #bbb;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
+  color: #333;
+  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
-.pagination-buttons button:hover {
+.pagination-buttons button:hover,
+.pagination button:hover {
   background-color: #f1f1f1;
+}
+
+/* 비활성화된 버튼 스타일 */
+.pagination button:disabled,
+.pagination-buttons button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+/* 활성화된 페이지 버튼 */
+.pagination-buttons button.active {
+  background-color: #4CAF50; /* 활성화된 버튼 색상 */
+  color: white;
 }
