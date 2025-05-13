@@ -124,6 +124,13 @@ function Ministry() {
     setIsGalleryOpen(false);
   };
 
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    setCurrentIndex((pageNumber - 1) * imagesPerPage);
+  };
+
+  const totalPages = Math.ceil(galleryImages[currentSeason].length / imagesPerPage);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowRight' && currentIndex < galleryImages[currentSeason].length - 1) {
@@ -138,23 +145,13 @@ function Ministry() {
     if (isGalleryOpen) {
       document.addEventListener('keydown', handleKeyDown);
     }
+
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isGalleryOpen, currentIndex, currentSeason]);
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    setCurrentIndex((pageNumber - 1) * imagesPerPage);
-  };
-
-  const totalPages = Math.ceil(galleryImages[currentSeason].length / imagesPerPage);
-  const currentImages = galleryImages[currentSeason].slice(
-    (currentPage - 1) * imagesPerPage,
-    currentPage * imagesPerPage
-  );
-
   return (
     <div className='season'>
-      {/* 카드 섹션 */}
+      {/* 카드 */}
       <section className="season-gallery">
         <div className="season-card-horizontal" onClick={() => openGallery("25season1")}>
           <div className="season-img-wrapper">
@@ -180,30 +177,33 @@ function Ministry() {
         <div className="gallery-popup">
           <span className="close" onClick={closeGallery}>&times;</span>
           <div className="gallery-content">
-            {currentImages.map((src, i) => {
-              const actualIndex = (currentPage - 1) * imagesPerPage + i;
-              return (
+            <img
+              src={galleryImages[currentSeason][currentIndex]}
+              className="main-gallery-img"
+              alt={`메인 이미지 ${currentIndex}`}
+            />
+            <div className="thumbnail-list">
+              {galleryImages[currentSeason].map((src, i) => (
                 <img
-                  key={actualIndex}
+                  key={i}
                   src={src}
-                  className={`thumbnail-img ${actualIndex === currentIndex ? 'active' : ''}`}
-                  alt={`썸네일 ${actualIndex}`}
-                  onClick={() => setCurrentIndex(actualIndex)}
+                  className={`thumbnail-img ${i === currentIndex ? 'active' : ''}`}
+                  alt={`썸네일 ${i}`}
+                  onClick={() => setCurrentIndex(i)}
                 />
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       )}
 
-      {/* 이전/다음 페이지 버튼 */}
+      {/* 페이지 이동 */}
       <div className="pagination">
         <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>이전</button>
         <span>페이지 {currentPage}</span>
         <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>다음</button>
       </div>
 
-      {/* 페이지 번호 버튼 (동적으로 생성) */}
       <div className="pagination-buttons">
         {Array.from({ length: totalPages }, (_, i) => (
           <button

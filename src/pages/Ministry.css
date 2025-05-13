@@ -1,5 +1,5 @@
 .season {
-  padding-bottom: 10px;
+  padding-bottom: 60px;
 }
 
 /* 시즌 카드 스타일 */
@@ -68,13 +68,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  overflow-y: auto; /* ✅ 스크롤 가능하도록 수정 */
   z-index: 1000;
+  padding: 20px;
 }
 
 .gallery-content {
@@ -104,31 +107,26 @@
 /* 썸네일 리스트 - 가로 스크롤 적용 */
 .thumbnail-list {
   display: flex;
-  overflow-x: auto;       /* ✅ 가로 스크롤 */
+  overflow-x: auto;  /* ✅ 가로 스크롤 가능하게 */
   gap: 10px;
-  padding: 10px 0;
-  justify-content: flex-start;
-  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+  max-width: 100%;
 }
 
 .thumbnail-img {
-  width: 60px;
-  height: 60px;
-  flex-shrink: 0;
-  cursor: pointer;
-  border-radius: 8px;
+  width: 100px;
+  height: 70px;
   object-fit: cover;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.thumbnail-img:hover {
-  opacity: 0.7;
-  transform: scale(1.1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s;
 }
 
 .thumbnail-img.active {
-  border: 3px solid #4CAF50;
+  border: 2px solid #fff;
 }
+
 
 /* 닫기 버튼 */
 .close {
@@ -144,10 +142,9 @@
 }
 
 /* 이전/다음 버튼 */
-/* 이전/다음 버튼 */
 .pagination {
-  position: absolute;
-  bottom: 30px; /* 페이지 버튼을 아래쪽으로 내림 */
+  position: relative;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -156,17 +153,6 @@
   align-items: center;
 }
 
-/* 페이지네이션 버튼 (목차) */
-.pagination-buttons {
-  position: absolute;
-  bottom: 80px; /* 페이지 번호 버튼을 이전/다음 버튼 위에 위치시킴 */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-}
-
-.pagination-buttons button,
 .pagination button {
   padding: 8px 16px;
   background-color: #ccc;  /* 기본 회색 배경 */
@@ -178,19 +164,39 @@
   transition: background-color 0.3s ease;
 }
 
-.pagination-buttons button:hover,
-.pagination button:hover {
-  background-color: #f1f1f1;
-}
-
-/* 비활성화된 버튼 스타일 */
-.pagination button:disabled,
-.pagination-buttons button:disabled {
+.pagination button:disabled {
   background-color: #e0e0e0;
   cursor: not-allowed;
 }
 
-/* 활성화된 페이지 버튼 */
+.pagination button:hover:not(:disabled) {
+  background-color: #f1f1f1;
+}
+
+/* 페이지네이션 버튼 (목차) */
+.pagination-buttons {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.pagination-buttons button {
+  padding: 5px 10px;
+  background-color: #ccc;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-buttons button:hover {
+  background-color: #f1f1f1;
+}
+
+/* 현재 선택된 페이지 버튼 */
 .pagination-buttons button.active {
   background-color: #4CAF50; /* 활성화된 버튼 색상 */
   color: white;
