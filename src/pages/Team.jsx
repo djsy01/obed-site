@@ -176,7 +176,7 @@ const Team = () => {
       positions: ["Vocal"],
       instagram: "https://www.instagram.com/yz_sol5",
       youtube: "https://youtube.com/channel/UCvyHxOBm7RDwCo62pFBwVSA?si=eBgRDrWO0dP5sE9H",
-      photo: "",
+      photo: "/assets/people/yesol.jpeg",
     },
   ];
 
