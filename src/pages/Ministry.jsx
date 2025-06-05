@@ -1,6 +1,20 @@
 // import 제거 (public 사용 시 불필요)
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Ministry.css';
+
+const seasonList = [
+  // season 데이터 예시, 실제로는 더 많은 시즌을 넣으면 됨
+  {
+    key: "25season1",
+    title: "2025년 Season 1 - “하나됨”",
+    description: `우리는 한 몸 아래 하나님께 예배하는 예배팀이 되길 원하며
+하나됨을 통해 교회를 섬기고, 교회를 넘어 열방을 섬기길 원합니다.`,
+    verse: `우리가 다 하나님의 아들을 믿는 것과 아는 일에 하나가 되어
+온전한 사람을 이루어 그리스도의 장성한 분량이 충만한 데까지 이르리니
+- 에베소서 4:13 -`,
+    imgSrc: "/assets/image/oneness/oneness.png",
+  },
+];
 
 // 이미지 경로 문자열로 수정
 const galleryImages = {
@@ -106,99 +120,112 @@ const galleryImages = {
   ],
 };
 
+const imagesPerPage = 10;  // 한 페이지에 보여줄 시즌 개수
+
 function Ministry() {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [currentSeason, setCurrentSeason] = useState("25season1");
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSeasonKey, setCurrentSeasonKey] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const imagesPerPage = 10;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const indexOfLastSeason = currentPage * imagesPerPage;
+  const indexOfFirstSeason = indexOfLastSeason - imagesPerPage;
+  const currentSeasons = seasonList.slice(indexOfFirstSeason, indexOfLastSeason);
+  const totalPages = Math.ceil(seasonList.length / imagesPerPage);
 
   const openGallery = (seasonKey) => {
-    setCurrentSeason(seasonKey);
-    setCurrentIndex(0);
-    setCurrentPage(1);
+    setCurrentSeasonKey(seasonKey);
+    setCurrentImageIndex(0);
     setIsGalleryOpen(true);
   };
 
-  const closeGallery = () => {
-    setIsGalleryOpen(false);
+  const closeGallery = () => setIsGalleryOpen(false);
+
+  const goToPage = (pageNum) => {
+    if (pageNum < 1 || pageNum > totalPages) return;
+    setCurrentPage(pageNum);
   };
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    setCurrentIndex((pageNumber - 1) * imagesPerPage);
+  const nextImage = () => {
+    if (!currentSeasonKey) return;
+    const images = galleryImages[currentSeasonKey] || [];
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
-  const totalImages = galleryImages[currentSeason].length;
-  const totalPages = Math.ceil(totalImages / imagesPerPage);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight' && currentIndex < galleryImages[currentSeason].length - 1) {
-        setCurrentIndex((prev) => prev + 1);
-      } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
-        setCurrentIndex((prev) => prev - 1);
-      } else if (e.key === 'Escape') {
-        closeGallery();
-      }
-    };
-
-    if (isGalleryOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isGalleryOpen, currentIndex, currentSeason]);
+  const prevImage = () => {
+    if (!currentSeasonKey) return;
+    const images = galleryImages[currentSeasonKey] || [];
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
-    <div className='season'>
-      {/* 카드 */}
-      <section className="season-gallery">
-        <div className="season-card-horizontal" onClick={() => openGallery("25season1")}>
-          <div className="season-img-wrapper">
-            <img src="/assets/image/oneness/oneness.png" alt="Season 1 - 하나됨" />
-          </div>
-          <div className="season-info">
-            <h3>2025년 Season 1 - “하나됨”</h3>
-            <p className="description">
-              우리는 한 몸 아래 하나님께 예배하는 예배팀이 되길 원하며<br />
-              하나됨을 통해 교회를 섬기고, 교회를 넘어 열방을 섬기길 원합니다.
-            </p>
-            <blockquote className="verse">
-              우리가 다 하나님의 아들을 믿는 것과 아는 일에 하나가 되어<br />
-              온전한 사람을 이루어 그리스도의 장성한 분량이 충만한 데까지 이르리니<br />
-              - 에베소서 4:13 -
-            </blockquote>
-          </div>
+    <div className="ministry-container">
+      <main className="main-content">
+        <div className="season-gallery">
+          {currentSeasons.map((season) => (
+            <div
+              key={season.key}
+              className="season-card-horizontal"
+              onClick={() => openGallery(season.key)}
+            >
+              <div className="season-img-wrapper">
+                <img src={season.imgSrc} alt={season.title} />
+              </div>
+              <div className="season-info">
+                <h3>{season.title}</h3>
+                <p className="description" style={{ whiteSpace: "pre-line" }}>
+                  {season.description}
+                </p>
+                <blockquote className="verse" style={{ whiteSpace: "pre-line" }}>
+                  {season.verse}
+                </blockquote>
+              </div>
+            </div>
+          ))}
         </div>
-      </section>
 
-      {/* 갤러리 팝업 */}
-      {isGalleryOpen && (
+        <div className="pagination">
+          <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
+            이전
+          </button>
+          <span>페이지 {currentPage} / {totalPages}</span>
+          <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
+            다음
+          </button>
+        </div>
+
+        <div className="pagination-buttons">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => goToPage(i + 1)}
+              className={currentPage === i + 1 ? 'active' : ''}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      </main>
+
+      {isGalleryOpen && currentSeasonKey && (
         <div className="gallery-popup">
           <span className="close" onClick={closeGallery}>&times;</span>
           <div className="gallery-content">
-            {/* 이전 이미지 버튼 */}
-            <button className="prev-button" onClick={() => setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : totalImages - 1)}>
-              &lt;
-            </button>
+            <button className="prev-button" onClick={prevImage}>&lt;</button>
             <img
-              src={galleryImages[currentSeason][currentIndex]}
+              src={galleryImages[currentSeasonKey][currentImageIndex]}
               className="main-gallery-img"
-              alt={`메인 이미지 ${currentIndex}`}
+              alt={`메인 이미지 ${currentImageIndex}`}
             />
-            {/* 다음 이미지 버튼 */}
-            <button className="next-button" onClick={() => setCurrentIndex(currentIndex < totalImages - 1 ? currentIndex + 1 : 0)}>
-              &gt;
-            </button>
+            <button className="next-button" onClick={nextImage}>&gt;</button>
             <div className="thumbnail-list">
-              {galleryImages[currentSeason].map((src, i) => (
+              {galleryImages[currentSeasonKey].map((src, i) => (
                 <img
                   key={i}
                   src={src}
-                  className={`thumbnail-img ${i === currentIndex ? 'active' : ''}`}
+                  className={`thumbnail-img ${i === currentImageIndex ? 'active' : ''}`}
                   alt={`썸네일 ${i}`}
-                  onClick={() => setCurrentIndex(i)}
+                  onClick={() => setCurrentImageIndex(i)}
                 />
               ))}
             </div>
@@ -206,24 +233,8 @@ function Ministry() {
         </div>
       )}
 
-      {/* 페이지 이동 */}
-      <div className="pagination">
-        <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>이전</button>
-        <span>페이지 {currentPage}</span>
-        <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>다음</button>
-      </div>
-
-      <div className="pagination-buttons">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => paginate(i + 1)}
-            className={currentPage === i + 1 ? 'active' : ''}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
+      {/* Footer 컴포넌트 있으면 이렇게 넣으세요 */}
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -94,7 +94,15 @@ const Team = () => {
       acount: ["Public Relations"],
       positions: ["Poster Making"],
       photo: "",
-    }, */
+    },
+    {
+      name: "김태성",
+      affiliation: "청년부",
+      acount: ["Worship"],
+      positions: ["Vocal", "Synthesizer", "Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Engineer"],
+      photo: "",
+    },
+    */
     {
       name: "유근서",
       affiliation: "청년부",

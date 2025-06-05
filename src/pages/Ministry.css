@@ -1,10 +1,19 @@
+/* ministry-container에 footer 공간 확보 */
+.ministry-container {
+  padding-bottom: 120px; /* 푸터 높이만큼 아래 공간 확보 */
+  min-height: 88vh;     /* 최소 높이 뷰포트 전체로 설정 */
+  box-sizing: border-box; /* padding 포함 box 크기 계산 */
+  overflow-y: auto;       /* 세로 스크롤 허용 */
+}
+
+/* season에도 padding-bottom 유지 */
 .season {
-  padding-bottom: 60px;
+  padding-bottom: 120px;
 }
 
 /* 시즌 카드 스타일 */
 .season-gallery {
-  padding-bottom: 460px; /* 페이지 하단에 충분한 공간을 확보 */
+  padding-bottom: 100px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -22,6 +31,7 @@
   transition: box-shadow 0.3s ease-in-out;
   width: 100%;
   max-width: 800px;
+  background-color: #fff;
 }
 
 .season-card-horizontal:hover {
@@ -31,18 +41,23 @@
 .season-img-wrapper {
   width: 33%;
   height: 100%;
+  min-width: 120px;
 }
 
 .season-img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .season-info {
   width: 67%;
-  padding: 10px;
+  padding: 10px 15px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .season-info h3 {
@@ -75,27 +90,34 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: auto; /* ✅ 스크롤 가능하도록 수정 */
+  overflow-y: auto;
   z-index: 1000;
   padding: 20px;
 }
 
 /* 닫기 버튼 */
 .close {
-  position: absolute;
-  top: 10px;
-  left: 1750px;
+  position: fixed;  /* fixed로 스크롤해도 위치 고정 */
+  top: 20px;
+  right: 20px;
   font-size: 30px;
   color: red;
   cursor: pointer;
+  z-index: 1100;
+  transition: color 0.3s ease;
+}
+.close:hover {
+  color: darkred;
 }
 
 /* 이미지 콘텐츠 */
 .gallery-content {
   position: relative;
   background: white;
-  width: 800px;           /* ✅ 고정 너비 */
-  height: 600px;          /* ✅ 고정 높이 */
+  width: 90vw;
+  max-width: 800px;
+  height: 80vh;
+  max-height: 600px;
   padding: 20px;
   border-radius: 10px;
   overflow: hidden;
@@ -109,7 +131,7 @@
 /* 이전/다음 버튼 */
 .prev-button, .next-button {
   position: absolute;
-  top: 38%;
+  top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
   border: none;
@@ -117,6 +139,11 @@
   color: yellowgreen;
   cursor: pointer;
   z-index: 10;
+  transition: color 0.3s ease;
+}
+
+.prev-button:hover, .next-button:hover {
+  color: #388e3c;
 }
 
 .prev-button {
@@ -130,8 +157,8 @@
 /* 메인 이미지 */
 .main-gallery-img {
   width: 100%;
-  height: 450px;          /* ✅ 고정 높이 */
-  object-fit: contain;    /* ✅ 비율 유지하며 공간 내에 맞춤 */
+  height: 70%;
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -139,11 +166,22 @@
 /* 썸네일 리스트 - 가로 스크롤 적용 */
 .thumbnail-list {
   display: flex;
-  overflow-x: auto;  /* ✅ 가로 스크롤 가능하게 */
+  overflow-x: auto;
   gap: 10px;
   margin-top: 20px;
-  padding: 10px;
+  padding: 10px 0;
   max-width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #4CAF50 transparent;
+}
+
+.thumbnail-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.thumbnail-list::-webkit-scrollbar-thumb {
+  background-color: #4CAF50;
+  border-radius: 4px;
 }
 
 .thumbnail-img {
@@ -152,15 +190,19 @@
   object-fit: cover;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: border 0.3s;
+  border-radius: 5px;
+  transition: border 0.3s, transform 0.3s;
+}
+
+.thumbnail-img:hover {
+  transform: scale(1.05);
 }
 
 .thumbnail-img.active {
-  border: 2px solid #fff;
+  border: 2px solid #4CAF50;
 }
 
-
-/* 이전/다음 버튼 */
+/* 이전/다음 버튼 (페이지네이션) */
 .pagination {
   position: relative;
   bottom: 30px;
@@ -170,11 +212,12 @@
   justify-content: center;
   gap: 20px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .pagination button {
   padding: 8px 16px;
-  background-color: #ccc;  /* 기본 회색 배경 */
+  background-color: #ccc;
   border: 1px solid #bbb;
   border-radius: 4px;
   cursor: pointer;
@@ -194,8 +237,6 @@
 
 /* 페이지네이션 버튼 (목차) */
 .pagination-buttons {
-  position: absolute;
-  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -217,6 +258,6 @@
 
 /* 현재 선택된 페이지 버튼 */
 .pagination-buttons button.active {
-  background-color: #4CAF50; /* 활성화된 버튼 색상 */
+  background-color: #4CAF50;
   color: white;
 }

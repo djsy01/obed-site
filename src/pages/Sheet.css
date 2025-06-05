@@ -99,3 +99,9 @@
 .pagination-buttons button:hover {
   background-color: #f1f1f1;
 }
+
+/* 현재 선택된 페이지 버튼 */
+.pagination-buttons button.active {
+  background-color: #4CAF50;
+  color: white;
+}
