@@ -142,7 +142,7 @@ const Team = () => {
       acount: ["Worship"],
       positions: ["Bass Guitar"],
       instagram: "https://www.instagram.com/_kjs_1127",
-      photo: "",
+      photo: "/assets/people/jungsuk.jpeg",
     },
     {
       name: "김온유",
