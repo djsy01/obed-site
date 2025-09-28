@@ -27,7 +27,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer /> {/* 푸터를 하단에 배치 */}
+      <Footer /> {/* 푸터는 하단에 배치 */}
     </Router>
   );
 }

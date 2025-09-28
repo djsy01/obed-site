@@ -3,6 +3,7 @@ import './Team.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
+// 팀원 데이터와 필터링 로직
 const Team = () => {
   const [filter, setFilter] = useState("all");
   const [worshipFilter, setWorshipFilter] = useState("");
@@ -32,12 +33,12 @@ const Team = () => {
       acount: ["Accounting"],
       positions: ["Accounting"],
       instagram: "https://www.instagram.com/cat0925_",
-      photo: "",
+      photo: "/assets/people/mijung.jpeg",
     },
     {
       name: "엄인호",
       affiliation: "청년부",
-      acount: ["Worship Leader"],
+      acount: ["Worship Team Leader"],
       positions: ["Vocal", "Acoustic Guitar", "Electric Guitar", "Engineer"],
       instagram: "https://www.instagram.com/inho010804",
       youtube: "https://www.youtube.com/@djsy-r2c",
@@ -46,11 +47,46 @@ const Team = () => {
     {
       name: "박상욱",
       affiliation: "청년부",
-      acount: ["Worship Sub Leader"],
+      acount: ["Worship Team Sub Leader"],
       positions: ["Bass Guitar", "Drum", "Engineer"],
       instagram: "https://www.instagram.com/drum_wook02",
       youtube: "https://youtube.com/channel/UC_vv_fm_8e3O8xTb5TbPKrg?si=5B5EEspQ7m8hhgYE",
       photo: "/assets/people/DrumWook.jpeg",
+    },
+    {
+      name: "전예원",
+      affiliation: "청년부",
+      acount: ["Planning team leader","Worship"],
+      positions: ["Vocal"],
+      instagram: "https://www.instagram.com/winnie_the_ron_02",
+      photo: "",
+    },
+    {
+      name: "지용민 집사",
+      acount : ["Worwhip"],
+      affiliation: "장년부",
+      positions: ["Vocal"],
+      instagram: "",
+      youtube: "",
+      photo: "",
+    },
+    {
+      name: "최영 집사",
+      acount: ["Worship"],
+      affiliation: "장년부",
+      positions: ["Vocal"],
+      instagram: "",
+      youtube: "",
+      photo: "",
+    },
+    {
+      name: "박소라 집사",
+      affiliation: "장년부",
+      acount: ["Worship"],
+      positions: ["Synthesizer"],
+      instagram: "",
+      youtube: "",
+      photo: "",
     },
     {
       name: "오현명 집사",
@@ -91,8 +127,8 @@ const Team = () => {
     {
       name: "김예섬",
       affiliation: "청년부",
-      acount: ["Public Relations"],
-      positions: ["Poster Making"],
+      acount: ["Step"],
+      positions: ["Planning Team"],
       photo: "",
     },
     {
@@ -129,14 +165,6 @@ const Team = () => {
       photo: "",
     },*/
     {
-      name: "전예원",
-      affiliation: "청년부",
-      acount: ["Worship"],
-      positions: ["Vocal"],
-      instagram: "https://www.instagram.com/winnie_the_ron_02",
-      photo: "",
-    },
-    {
       name: "김정석",
       affiliation: "청년부",
       acount: ["Worship"],
@@ -147,7 +175,7 @@ const Team = () => {
     {
       name: "김온유",
       affiliation: "청년부",
-      acount: ["Worship"],
+      acount: ["Worship", "Planning Team"],
       positions: ["Vocal"],
       instagram: "https://www.instagram.com/onyourmusic",
       youtube: "https://www.youtube.com/@onyourmusic",
@@ -164,7 +192,7 @@ const Team = () => {
     {
       name: "신지은",
       affiliation: "청년부",
-      acount: ["Worship"],
+      acount: ["Worship", "Planning Team"],
       positions: ["Piano", "Synthesizer"],
       instagram: "https://www.instagram.com/_wldms.3",
       photo: "",
@@ -180,7 +208,7 @@ const Team = () => {
     {
       name: "신예솔",
       affiliation: "고등부",
-      acount: ["Worship"],
+      acount: ["Worship", "Planning Team"],
       positions: ["Vocal"],
       instagram: "https://www.instagram.com/yz_sol5",
       youtube: "https://youtube.com/channel/UCvyHxOBm7RDwCo62pFBwVSA?si=eBgRDrWO0dP5sE9H",
@@ -188,21 +216,25 @@ const Team = () => {
     },
   ];
 
+  // 필터링 로직
   const filteredMembers = members.filter((member) => {
     if (filter === "all") return true;
 
+    // 리더십 필터링
     if (filter === "leader") {
-      return ["Pastor","Elder", "Accounting", "Secretary", "Worship Leader", "Worship Sub Leader"]
+      return ["Pastor","Elder", "Accounting", "Secretary", "Worship Team Leader", "Worship Team Sub Leader", "Planning team leader"]
         .some(role => member.acount.includes(role));
     }
 
+    // 워십 팀 필터링
     if (filter === "worship") {
-      const isWorshipLeader = member.acount.includes("Worship Leader");
-      const isWorshipSubLeader = member.acount.includes("Worship Sub Leader");
+      const isWorshipLeader = member.acount.includes("Worship Team Leader");
+      const isWorshipSubLeader = member.acount.includes("Worship Team Sub Leader");
       const hasWorshipPosition = member.positions.some(pos =>
         ["Vocal", "Piano", "Synthesizer", "Acoustic Guitar", "Electric Guitar", "Bass Guitar", "Drum", "Engineer"].includes(pos)
       );
-
+      
+      // 워십 필터링 조건
       if (worshipFilter === "") {
         return isWorshipLeader || isWorshipSubLeader || hasWorshipPosition;
       } else if (worshipFilter === "Guitar") {
@@ -216,12 +248,23 @@ const Team = () => {
       }
     }
 
+    // 스텝 팀 필터링
     if (filter === "step") {
+      const isPlanningTeam = member.acount.includes("Planning Team") || member.acount.includes("Planning team leader");
+      const hasStepPosition = member.positions.some(pos =>
+        ["Media", "Planning Team"].includes(pos)
+      );
+
+      if (!isPlanningTeam && !hasStepPosition) return false;
+      
       if (stepFilter === "") {
-        return member.positions.some(pos =>
-          ["Media", "Public Relations"].includes(pos)
-        );
+        return true;
       } else {
+        if (stepFilter === "Planning Team") {
+          return member.positions.includes("Planning Team") || 
+                 member.acount.includes("Planning Team") || 
+                 member.acount.includes("Planning team leader");
+        }
         return member.positions.includes(stepFilter);
       }
     }
@@ -229,14 +272,18 @@ const Team = () => {
     return false;
   });
 
+  // 메인 필터 버튼 클릭 핸들러
   const handleMainFilter = (value) => {
     setFilter(value);
     setWorshipFilter("");
     setStepFilter("");
   };
 
+  // 메인 렌더
   return (
+    // 팀 소개 섹션
     <section className="team-section">
+      {/* 팀 성경 구절 */}
       <div className="bible-verse">
         <blockquote>
           <p>“너희는 너희 하나님 여호와를 순종하며, 그를 경외하며 그 명령을 지키며<br />
@@ -245,6 +292,7 @@ const Team = () => {
         </blockquote>
       </div>
 
+      {/* 팀 설명 */}
       <div className="team-description">
         <div className="highlight-box">빠르게 변화해가는 세상 속에서 주님을 향해 두려움을 내려놓고 목소리로 주님과 소통하는 찬양팀</div><br />
         <div className="highlight-box">청중들과 함께 소통하며 예배의 중심이 주님께 내려놓는 찬양팀</div><br />
@@ -252,9 +300,11 @@ const Team = () => {
         <div className="highlight-box">주님의 사랑을 잊고 살아가는 사람들에게 “너희는 잊어도 그리스도이신 주님께서는 아직도 우릴 찾고 있다”는 것을 다시금 깨닫게 하기 위해</div>
       </div>
 
+      {/* 팀원 섹션 */}
       <div className="team-member-section">
         <h2>팀원 소개</h2>
 
+        {/* 필터 버튼들 */}
         <div className="position-filter">
           <button className={`filter-btn ${filter === "all" ? "active" : ""}`} onClick={() => handleMainFilter("all")}>All</button>
           <button className={`filter-btn ${filter === "leader" ? "active" : ""}`} onClick={() => handleMainFilter("leader")}>Leader</button>
@@ -262,6 +312,7 @@ const Team = () => {
           <button className={`filter-btn ${filter === "step" ? "active" : ""}`} onClick={() => handleMainFilter("step")}>Step</button>
         </div>
 
+        {/* 서브 필터 버튼들 */}
         {filter === "worship" && (
           <div className="worship-filters">
             <button className={`filter-btn ${worshipFilter === "" ? "active" : ""}`} onClick={() => setWorshipFilter("")}>Worship All</button>
@@ -273,14 +324,16 @@ const Team = () => {
           </div>
         )}
 
+        {/* 스텝 필터 버튼들 */}
         {filter === "step" && (
           <div className="step-filters">
             <button className={`filter-btn ${stepFilter === "" ? "active" : ""}`} onClick={() => setStepFilter("")}>Step All</button>
             <button className={`filter-btn ${stepFilter === "Media" ? "active" : ""}`} onClick={() => setStepFilter("Media")}>Media</button>
-            <button className={`filter-btn ${stepFilter === "Public Relations" ? "active" : ""}`} onClick={() => setStepFilter("Public Relations")}>Public Relations</button>
+            <button className={`filter-btn ${stepFilter === "Planning Team" ? "active" : ""}`} onClick={() => setStepFilter("Planning Team")}>Planning Team</button>
           </div>
         )}
 
+        {/* 팀원 카드 그리드 */}
         <div className="member-grid">
           {filteredMembers.map((member, index) => (
             <div className="member-card" key={index}>
