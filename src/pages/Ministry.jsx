@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './Ministry.css';
 
+// Season 데이터와 이미지 경로를 문자열로 관리
 const seasonList = [
   // season 데이터 예시, 실제로는 더 많은 시즌을 넣으면 됨
   {
@@ -120,47 +121,62 @@ const galleryImages = {
   ],
 };
 
-const imagesPerPage = 10;  // 한 페이지에 보여줄 시즌 개수
+// 한 페이지에 보여줄 시즌 개수
+const imagesPerPage = 10;
 
+// Ministry 컴포넌트
 function Ministry() {
+  // 상태 관리
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  // 현재 선택된 시즌 키
   const [currentSeasonKey, setCurrentSeasonKey] = useState(null);
+  // 현재 페이지 번호
   const [currentPage, setCurrentPage] = useState(1);
+  // 현재 갤러리 이미지 인덱스
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  
+  // 페이지네이션 계산
   const indexOfLastSeason = currentPage * imagesPerPage;
   const indexOfFirstSeason = indexOfLastSeason - imagesPerPage;
   const currentSeasons = seasonList.slice(indexOfFirstSeason, indexOfLastSeason);
   const totalPages = Math.ceil(seasonList.length / imagesPerPage);
 
+  // 갤러리 열기/닫기 및 이미지 이동 함수
   const openGallery = (seasonKey) => {
     setCurrentSeasonKey(seasonKey);
     setCurrentImageIndex(0);
     setIsGalleryOpen(true);
   };
 
+  // 갤러리 닫기 함수
   const closeGallery = () => setIsGalleryOpen(false);
 
+  // 페이지 이동 함수
   const goToPage = (pageNum) => {
     if (pageNum < 1 || pageNum > totalPages) return;
     setCurrentPage(pageNum);
   };
 
+  // 갤러리 이미지 이동 함수
   const nextImage = () => {
     if (!currentSeasonKey) return;
     const images = galleryImages[currentSeasonKey] || [];
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
+  // 이전 이미지 함수
   const prevImage = () => {
     if (!currentSeasonKey) return;
     const images = galleryImages[currentSeasonKey] || [];
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // 렌더링
   return (
     <div className="ministry-container">
+      {/* 메인 컨텐츠 */}
       <main className="main-content">
+        {/* 시즌 갤러리 */}
         <div className="season-gallery">
           {currentSeasons.map((season) => (
             <div
@@ -184,6 +200,7 @@ function Ministry() {
           ))}
         </div>
 
+        {/* 페이지네이션 */}
         <div className="pagination">
           <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
             이전
@@ -194,6 +211,7 @@ function Ministry() {
           </button>
         </div>
 
+        {/* 페이지 번호 버튼 */}
         <div className="pagination-buttons">
           {Array.from({ length: totalPages }, (_, i) => (
             <button
@@ -207,6 +225,7 @@ function Ministry() {
         </div>
       </main>
 
+      {/* 갤러리 팝업 */}
       {isGalleryOpen && currentSeasonKey && (
         <div className="gallery-popup">
           <span className="close" onClick={closeGallery}>&times;</span>
@@ -232,9 +251,6 @@ function Ministry() {
           </div>
         </div>
       )}
-
-      {/* Footer 컴포넌트 있으면 이렇게 넣으세요 */}
-      {/* <Footer /> */}
     </div>
   );
 }

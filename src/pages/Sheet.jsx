@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Sheet.css'; // 필요한 CSS 파일
+import './Sheet.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,22 +15,29 @@ const Sheet = () => {
     // 추가 악보 데이터를 여기에 삽입...
   ];
 
+  // 페이지네이션 상태
   const cardsPerPage = 20;
+  // 현재 페이지 상태
   const [currentPage, setCurrentPage] = useState(1);
+  // 총 페이지 수 상태
   const [totalPages, setTotalPages] = useState(Math.ceil(sheets.length / cardsPerPage));
-
+  // 현재 페이지에 해당하는 악보 카드들
   const currentSheets = sheets.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
 
+  // 총 페이지 수 업데이트
   useEffect(() => {
     setTotalPages(Math.ceil(sheets.length / cardsPerPage));
   }, [sheets.length]);
 
+  // 페이지 변경 핸들러
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
+  // 렌더링
   return (
     <section className="sheet-section">
+      {/* 섹션 타이틀 및 설명 */}
       <h2>악보 자료실</h2>
       <p>악보를 클릭하면 PDF로 다운로드 가능합니다.</p>
 

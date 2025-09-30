@@ -1,9 +1,11 @@
 import React from 'react';
 import './Map.css';
 
+// 렌더링
 function Map() {
   return (
     <div className="map-section">
+      {/* 섹션 타이틀 및 설명 */}
       <h2>찾아오시는 길</h2>
       <p>
         경기도 고양시 덕양구 용현로 64 (예수인교회) <br/>
@@ -12,6 +14,7 @@ function Map() {
         </div>
       </p>
 
+      {/* 구글 지도 임베드 */}
       <div className="map-container">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1580.1564111497155!2d126.8361455337295!3d37.61832881652992!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9a4552397f0b%3A0xc99a963ed07b51d8!2z7JiI7IiY7J246rWQ7ZqM!5e0!3m2!1sko!2sus!4v1746049290723!5m2!1sko!2sus"
@@ -25,6 +28,7 @@ function Map() {
         />
       </div>
 
+      {/* 길찾기 링크 */}
       <div className="map-links">
         <a
           href="https://www.google.com/maps/dir/?api=1&destination=예수인교회+고양시+덕양구+용현로+64"
